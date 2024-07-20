@@ -1,6 +1,6 @@
 package com.example.handmade.web;
 
-import com.example.handmade.model.dtos.UserRegistrationDTO;
+import com.example.handmade.model.dtos.UserLoginDTO;
 import com.example.handmade.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,19 +15,14 @@ public class UserController {
     }
 
 
-    @GetMapping("/users/register")
-    public String register(){
-        return "auth-register";
-    }
-
     @GetMapping("/users/login")
-    public String login(){
+    public String login() {
         return "auth-login";
     }
 
-    @PostMapping("/users/register")
-    public String register(UserRegistrationDTO userRegistrationDTO){
-        userService.registerUser(userRegistrationDTO);
-        return "index";
+    @PostMapping("/users/login")
+    public String login(UserLoginDTO userLoginDTO){
+        userService.login(userLoginDTO);
+        return "redirect:/";
     }
 }

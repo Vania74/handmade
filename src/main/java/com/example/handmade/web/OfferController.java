@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -19,6 +20,10 @@ public class OfferController {
     public OfferController(OfferService offerService) {
         this.offerService = offerService;
     }
+    @ModelAttribute("allCategoryType")
+    public CategoryTypeEnum[] allCategoryTypes(){
+        return CategoryTypeEnum.values();
+    }
 
     @GetMapping("/offers/add")
     public String newOffer(Model model) {
@@ -26,7 +31,7 @@ public class OfferController {
             model.addAttribute("addOfferDTO" , AddOfferDTO.empty());
         }
 
-        model.addAttribute("allCategoryTypes", CategoryTypeEnum.values());
+       // model.addAttribute("allCategoryTypes", CategoryTypeEnum.values());
 
         return "offer-add";
     }

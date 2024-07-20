@@ -1,13 +1,34 @@
 package com.example.handmade.model.dtos;
 
-public class UserRegistrationDTO {
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
+public class UserRegistrationDTO {
+    @NotBlank
+    @Size(min = 5, max = 20)
     private String firstName;
+    @NotBlank
+    @Size(min = 5, max = 20)
     private String lastName;
+    @Email
+    @NotBlank
     private String email;
+    @NotBlank
     private String password;
+    @NotBlank
+    private String confirmPassword;
 
     public UserRegistrationDTO() {
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public UserRegistrationDTO setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+        return this;
     }
 
     public String getFirstName() {
