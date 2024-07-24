@@ -15,6 +15,16 @@ public class OfferEntity {
     private Long id;
 
     private String description;
+    private String img;
+
+    public String getImg() {
+        return img;
+    }
+
+    public OfferEntity setImg(String img) {
+        this.img = img;
+        return this;
+    }
 
     @Enumerated(EnumType.STRING)
     private CategoryTypeEnum category;

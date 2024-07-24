@@ -7,9 +7,7 @@ import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
@@ -20,7 +18,7 @@ public class OfferController {
     public OfferController(OfferService offerService) {
         this.offerService = offerService;
     }
-    @ModelAttribute("allCategoryType")
+    @ModelAttribute("allCategoryTypes")
     public CategoryTypeEnum[] allCategoryTypes(){
         return CategoryTypeEnum.values();
     }
@@ -31,7 +29,7 @@ public class OfferController {
             model.addAttribute("addOfferDTO" , AddOfferDTO.empty());
         }
 
-       // model.addAttribute("allCategoryTypes", CategoryTypeEnum.values());
+      //  model.addAttribute("allCategoryTypes", CategoryTypeEnum.values());
 
         return "offer-add";
     }
@@ -48,5 +46,16 @@ public class OfferController {
         long newOfferId = offerService.createOffer(addOfferDTO);
         return "redirect:/offers/"+newOfferId;
 
+    }
+
+    @GetMapping("/offers/{id}")
+    public String offerDetail(@PathVariable("id") Long id, Model model){
+        model.addAttribute("offerDetail",offerService.getOfferDetail(id));
+        return "details";
+    }
+    @DeleteMapping("/offers/{id}")
+    public String deleteOffer(@PathVariable("id") Long id){
+        offerService.deleteOffer(id);
+        return "redirect:/offers/all";
     }
 }

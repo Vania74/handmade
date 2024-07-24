@@ -25,4 +25,10 @@ public class UserController {
         userService.login(userLoginDTO);
         return "redirect:/";
     }
+
+    @PostMapping("/logout")
+    public String logout(){
+        userService.logout();
+        return "redirect:/";
+    }
 }

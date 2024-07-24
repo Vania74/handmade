@@ -15,7 +15,7 @@
 <div th:fragment="navbar(activeLink)">
 
     <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
-        <a class="navbar-brand" href="/"><img alt="car picture" src="/img/car.png" class="logo"></a>
+        <a class="navbar-brand" href="/"><img alt="car picture" src="/img/handmade.jpg" class="logo"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -26,6 +26,7 @@
                 <li class="nav-item"
                 >
                     <a class="nav-link" href="/brands/all">All Brands</a>
+
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/offers/add"
@@ -33,7 +34,9 @@
                     >Add Offer</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/offers/all">All Offers</a>
+                    <a class="nav-link" href="/offers/all"
+                       th:classappend="${activeLink == 'all-offers'}? 'active'"
+                    >All Offers</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button"
@@ -51,7 +54,11 @@
                     <div class="form-inline my-2 my-lg-0 border px-3">
                         <div class="logged-user"
                              text="Welcome, Gosho"></div>
-                        <a class="nav-link" href="/users/logout">Logout</a>
+                        <form th:method="post"
+                              th:action="@{/logout}">
+                            <input class="btn btn-link" type="submit" value="Logout"/>
+                        </form>
+
                     </div>
                 </li>
 
